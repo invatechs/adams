@@ -1,0 +1,16 @@
+{
+  "adams": {
+    "port": "7895",
+    "host": "localhost"
+  },
+  "projects": [
+    {
+      "git": "https://github.com/invatechs/adams.git",
+      "gitBranch": "master",
+      "username": "",
+      "password": "",
+      "webhookPath": "invatechs/adams"
+    }
+  ],
+  "notifications": {}
+}
