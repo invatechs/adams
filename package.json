@@ -23,7 +23,10 @@
     "request": "^2.65.0",
     "sender-js": "*",
     "striptags": "latest",
-    "nodegit": "0.5.0"
+    "nodegit": "0.5.0",
+		"commander": "latest",
+		"win-spawn": "latest",
+		"is-running": "latest"
   },
   "devDependencies": {
     "jshint": "latest",
@@ -33,6 +36,9 @@
     "grunt-contrib-jshint": "~0.10.0"
   },
   "preferGlobal": true,
+	"bin": {
+    "adams": "./bin/cli.js"
+  },
   "scripts": {
     "lint": "jshint *.js",
     "test": "mocha",
