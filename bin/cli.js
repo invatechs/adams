@@ -27,7 +27,7 @@ if(!program.stop) {
 		console.log('ADAMS service is already running');
 	} else {
 		var appCommand = 'node '+path.resolve(__dirname, '../adams.js');
-		console.log(appCommand); process.exit();
+
 		var appArgs = [];
 
 		// There is a projects argument

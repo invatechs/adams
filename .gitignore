@@ -42,4 +42,5 @@ config.local.json
 lib/monitoring.js
 lib/templates
 lib/templates/*.html
-/nbproject/private/
+/nbproject
+bin/cli.pid
