@@ -24,7 +24,20 @@ if(fs.existsSync(path.resolve(__dirname, 'cli.pid'))) {	// Process ID file is fo
 
 if(!program.stop) {
 	if(pid && running(pid))	{
-		console.log('ADAMS service is already running');
+    // Check if the process ID applies to ADAMS
+    child_process.exec("ps -aux | grep " + pid, function(err, data) {
+			if (err) {
+				console.log(err, data);
+			} else {
+				var proc = data.split("\n");
+        for(var i = 0; i < proc.length; i++) {
+          if(proc[i].indexOf('adams.js') !== -1) {
+            console.log('ADAMS service is already running');
+            break;
+          }
+        }
+			}
+		});
 	} else {
 		var appCommand = path.resolve(__dirname, '../adams.js');
 
