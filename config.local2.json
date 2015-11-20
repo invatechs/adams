@@ -1,0 +1,50 @@
+{
+  "adams": {
+    "port": "7895",
+    "host": "localhost"
+  },
+  "projects": [
+    {
+      "git": "https://bitbucket.org/invatechs/cc-web.git",
+      "gitBranch": "master",
+      "username": "cccollect-dummy",
+      "password": "Fk4tme$3fwfk_2",
+      "webhookPath": "invatechs/cc-web"
+    },
+    {
+      "git": "https://bitbucket.org/invatechs/cc-admin.git",
+      "gitBranch": "master",
+      "username": "cccollect-dummy",
+      "password": "Fk4tme$3fwfk_2",
+      "webhookPath": "invatechs/cc-admin"
+    },
+    {
+      "git": "https://bitbucket.org/invatechs/cc-broker.git",
+      "gitBranch": "master",
+      "username": "cccollect-dummy",
+      "password": "Fk4tme$3fwfk_2",
+      "webhookPath": "invatechs/cc-broker"
+    },
+    {
+      "git": "https://github.com/cccollect/api-worker.git",
+      "gitBranch": "master",
+      "username": "cccollect-dummy",
+      "password": "Fk4tme$3fwfk_2",
+      "webhookPath": "cccollect/api-worker"
+    }
+  ],
+  "notifications": {
+    "senderJs": {
+      "slack": {
+        "token": "xoxb-13318779410-pzpt8t3JkcqxcuNtDCakcjAF",
+        "channel": "general"
+      },
+      "mailgun": {
+        "apiKey": "key-7aab525821310901f3f49b07f7d7e361",
+        "domain": "mg.invatechs.com"
+      }
+    },
+    "mailReciever": "rusakov.dm@gmail.com, i.vetrov@gmail.com, alex-sad"
+    "mailSender": "adams@invatechs.com"
+  }
+}

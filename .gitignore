@@ -37,6 +37,7 @@ tmp
 
 # local test config
 config.local.json
+config.local2.json
 
 # while monitoring in beta
 lib/monitoring.js
