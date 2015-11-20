@@ -17,18 +17,18 @@ program
     .parse(process.argv);
 
 var pid = 0;
-if(fs.existsSync("cli.pid")) {	// Process ID file is found
+if(fs.existsSync(path.resolve(__dirname, 'cli.pid'))) {	// Process ID file is found
 		// Check for active app process
-		pid = parseInt(fs.readFileSync('cli.pid'));
+		pid = parseInt(fs.readFileSync(path.resolve(__dirname, 'cli.pid')));
 }
 
 if(!program.stop) {
 	if(pid && running(pid))	{
 		console.log('ADAMS service is already running');
 	} else {
-		var appCommand = 'node '+path.resolve(__dirname, '../adams.js');
+		var appCommand = path.resolve(__dirname, '../adams.js');
 
-		var appArgs = [];
+		var appArgs = [appCommand];
 
 		// There is a projects argument
 		if(program.projects && fs.existsSync(program.projects)) {
@@ -36,28 +36,33 @@ if(!program.stop) {
 			appArgs.push(program.projects);
 		}
 
-		// Log file is specified
-		var logFile = null;
-		if(program.log) {
-			logFile = path.resolve(__dirname, program.log);
-			appCommand += ' > ' + logFile + ' 2>&1 &';
-		}
-
 		var spawnOptions = { 
 						detached: true, 
 						stdio: [ 'ignore', 'pipe', 'pipe'],
-						cwd: path.resolve(__dirname, "./")
+						cwd: path.resolve(__dirname, "../")
 		};
+    
+    // Log file is specified
+		var logFile = '/dev/null';
+		if(program.log) {
+			logFile = path.resolve(__dirname, '../' + program.log);
+		}
+    
+    var out = fs.openSync(logFile, 'a');
+    var err = fs.openSync(logFile, 'a');
+    spawnOptions.stdio = [ 'ignore', out, err];
 
-		var child = spawn(appCommand, appArgs, spawnOptions);
+    var child = spawn('node', appArgs, spawnOptions);
 
-		fs.writeFileSync(path.resolve(__dirname, 'cli.pid'), child.pid, "utf-8");
+    if(child.pid) {
+      fs.writeFileSync(path.resolve(__dirname, 'cli.pid'), child.pid, "utf-8");
+    }
 
 		child.unref();
+    process.exit();
 	}
-	process.exit();
 } else {
-	if(pid) {
+	if(pid) {   
 		child_process.exec("kill " + pid, function(err, data) {
 			if (err) {
 				console.log(err, data);
