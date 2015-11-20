@@ -1,5 +1,5 @@
 # Adams
-ADAMS stants for "automated deploy and monitoring system". 
+ADAMS stands for "automated deploy and monitoring system". 
 It uses GitHub and BitBucket webhooks to deploy and notify with [sender-js](https://www.npmjs.com/package/sender-js).
 
 1. Start it on your server;
