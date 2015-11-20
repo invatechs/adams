@@ -9,6 +9,8 @@ var child_process = require('child_process');
 var spawn = require('win-spawn');
 var running = require('is-running');
 
+var nodeCommand = process.argv[0];
+
 program
     .version("0.0.1")
     .option('-p, --projects [projectsFile]', 'Path to projects file')
@@ -39,10 +41,10 @@ if(!program.stop) {
 			}
 		});
 	} else {
-		var appCommand = path.resolve(__dirname, '../adams.js');
-
-		var appArgs = [appCommand];
-
+    var appArgs = [];
+    
+		appArgs.push(path.resolve(__dirname, '../adams.js'));
+   
 		// There is a projects argument
 		if(program.projects && fs.existsSync(program.projects)) {
 			appArgs.push('--projects');
@@ -65,7 +67,7 @@ if(!program.stop) {
     var err = fs.openSync(logFile, 'a');
     spawnOptions.stdio = [ 'ignore', out, err];
 
-    var child = spawn('node', appArgs, spawnOptions);
+    var child = spawn(nodeCommand, appArgs, spawnOptions);
 
     if(child.pid) {
       fs.writeFileSync(path.resolve(__dirname, 'cli.pid'), child.pid, "utf-8");
