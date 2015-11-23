@@ -5,13 +5,11 @@
     "webhook",
     "hook",
     "deploy",
-    "notification",
-    "mailgun",
-    "nodemailer",
-    "slack"
+    "notification"
   ],
   "contributors": [
-    "Dmitry Rusakov <dmitryrusakov@gmail.com>"
+    "Dmitry Rusakov <dmitryrusakov@gmail.com>",
+    "Alex Sadovsky <alex.sad.dev@gmail.com>"
   ],
   "version": "0.0.1",
   "description": "Automated Deploy And Monitoring System",
@@ -36,7 +34,7 @@
     "grunt-contrib-jshint": "~0.10.0"
   },
   "preferGlobal": true,
-	"bin": {
+  "bin": {
     "adams": "./bin/cli.js"
   },
   "scripts": {
