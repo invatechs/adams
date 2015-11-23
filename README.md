@@ -1,6 +1,6 @@
 # Adams
 ADAMS stands for "automated deploy and monitoring system". 
-It uses GitHub and BitBucket webhooks to deploy and notify with [sender-js](https://www.npmjs.com/package/sender-js).
+It uses GitHub and BitBucket webhooks to clone ([nodegit](https://www.npmjs.com/package/nodegit)), deploy and notify ([sender-js](https://www.npmjs.com/package/sender-js)).
 
 1. Start it on your server;
 2. Edit `config.json` file.
@@ -17,7 +17,7 @@ All the fields are required. Remember to use pure JSON format. Each project coul
     {
         "git": "https://github.com/invatechs/adams.git", // link used for clone project;
         "gitBranch": "master", // single branch you want to be proceeded;
-        "username": "username", // username for git account that have at least read rights for git repository;
+        "username": "username", // username for git account that have at least read rights for git repository; you can specify empty username and password if current git account is publick; 
         "password": "password", // password for that git account;
         "webhookPath": "your-hook-path" // path for webhook after server DNS address, for example: you have your server running on `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com`, so you can create webhook `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com/your-hook-path`;
     }
@@ -28,7 +28,7 @@ All the fields are required. Remember to use pure JSON format. Each project coul
 
 We use sender-js for sending notifications by e-mail, Slack or HTTP API.
 
-Configure `"notification"` field in `config.js` according to [sender-js](https://www.npmjs.com/package/sender-js) like so:
+Configure `"notification"` field in `config.json` according to [sender-js](https://www.npmjs.com/package/sender-js) like so:
 
 ```js
 "notifications": {
@@ -46,3 +46,58 @@ Configure `"notification"` field in `config.js` according to [sender-js](https:/
     "mailSender": "dummy-email-address@mail.com"
   }
 ```
+
+
+## <a name="configuring-nginx"></a>Configuring Nginx
+
+You should update Nxing's `.conf` file adding routes according to your webhooks paths. It can look like so:
+                                                                          
+```js
+server {
+    server_name ec2-11-22-333-444.us-east-1.compute.amazonaws.com;
+    listen 80;
+    root /var/www/aws.url;
+        
+    location / {
+        proxy_pass http://127.0.0.1:7895/; # 7895 - port which adams listens
+    }
+}
+```
+ 
+
+## Monitoring
+
+Adams provides simple web interface for monitoring your `.log` files.
+
+Configuring monitoring requires you to follow steps below:
+
+1) Configure `config.json` - add/update `"monitoring"` field like so:
+```js
+"monitoring": {
+    "path": "adams-log",
+    "projects": [
+        {},
+        {}
+    ]
+}
+```
+
+2) Make sure that route `/adams-log` is available through you Nginx `.conf`. Look at [Configuring Nginx](#configuring-nginx).
+
+
+## Tests
+ 
+There are few tests for [Mocha](http://mochajs.org). 
+You can start tests running `npm test` command from parent directory. 
+We keep working on covering Adams with this kind of tests.
+
+Also you can simply run `node test.js` from `./test` directory - that test starts Adams 
+with `./config.json` configuration and logs output to `./lib/app.log` file. 
+Then it sends simple template POST request to Adams and Adams starts cloning and 
+deploying himself locally from [Adams GitHub public repository](https://github.com/invatechs/adams).
+
+
+## License
+Copyright 2015 Invatechs.
+
+Licensed under the MIT License.

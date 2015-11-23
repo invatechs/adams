@@ -41,7 +41,7 @@
   },
   "scripts": {
     "lint": "jshint *.js",
-    "test": "mocha",
+    "test": "mocha ./test/mocha-test.js",
     "adams": "echo ADAMS successfully deployed"
   },
   "repository": {

@@ -39,8 +39,9 @@ tmp
 config.local.json
 
 # while monitoring in beta
-lib/monitoring.js
-lib/templates
-lib/templates/*.html
+#lib/monitoring.js
+#lib/templates
+#lib/templates/*.html
+
 /nbproject
 bin/cli.pid

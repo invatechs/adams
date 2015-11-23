@@ -12,5 +12,12 @@
       "webhookPath": "invatechs/adams"
     }
   ],
-  "notifications": {}
+  "notifications": {},
+  "monitoring": {
+    "path": "adams-log",
+    "projects": [
+      {},
+      {}
+    ]
+  }
 }
