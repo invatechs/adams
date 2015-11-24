@@ -42,7 +42,7 @@ Configure `"notification"` field in `config.json` according to [sender-js](https
         "domain": "mg.your-domain.com"
       }
     },
-    "mailReciever": "email-address1@mail.com,email-address2@mail.com",
+    "mailReceiver": "email-address1@mail.com,email-address2@mail.com",
     "mailSender": "dummy-email-address@mail.com"
   }
 ```
@@ -74,10 +74,16 @@ Configuring monitoring requires you to follow steps below:
 1) Configure `config.json` - add/update `"monitoring"` field like so:
 ```js
 "monitoring": {
-    "path": "adams-log",
+    "path": "adams-log", // path for all projects page
     "projects": [
-        {},
-        {}
+        {
+            "logPath": "/var/www/app1/app.log", // absolute path to the .log file
+            "alias": "my-app-1" // name that would be shown at the all projects page
+        },
+        {
+            "logPath": "/var/www/app2/app.log",
+            "alias": "my-app-2"
+        }
     ]
 }
 ```
