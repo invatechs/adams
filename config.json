@@ -16,8 +16,10 @@
   "monitoring": {
     "path": "adams-log",
     "projects": [
-      {},
-      {}
+      {
+        "logPath": "/usr/ec2-user/adams/lib/app.log",
+        "alias": "adams"
+      }
     ]
   }
 }
