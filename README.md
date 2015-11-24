@@ -101,6 +101,8 @@ Also you can simply run `node test.js` from `./test` directory - that test start
 with `./config.json` configuration and logs output to `./lib/app.log` file. 
 Then it sends simple template POST request to Adams and Adams starts cloning and 
 deploying himself locally from [Adams GitHub public repository](https://github.com/invatechs/adams).
+That test also include monitoring itself - configure `"monitoring.projects[0].logPath"` field 
+according to your directory. 
 
 
 ## License
