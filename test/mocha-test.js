@@ -1,6 +1,24 @@
 var assert = require('assert');
-var adams = require('../adams.js');
+//var adams = require('../adams.js');
+var child_process = require('child_process');
 var request = require('request');
+var path = require("path");
+var adamsStarted = false;
+
+child_process.exec("ps -ef | grep ./adams.js | grep -v grep | awk '{ print $2 }'", function(err, data) {
+			if (err) {
+				console.log(err, data);
+			} else {
+        if(data.length === 0) {
+          var adamsPath = 'sh ' + path.resolve(__dirname, '../start.sh');
+          child_process.exec(adamsPath, {}, function(err, stdout, stderr){
+            if(!err) {
+              adamsStarted = true;
+            }
+          });
+        }
+      }
+		});
 
 var config = {};
 
@@ -109,21 +127,29 @@ var gitHubTestBody = {
 //  }
 //};
 
-
-
-
 //module.exports =  function() {
 beforeEach(function (done) {
   setTimeout(done, 1000);
 });
 
+after(function(done){
+  if(adamsStarted) {
+    var adamsStop = "sh " + path.resolve(__dirname, '../stop.sh');
+    child_process.exec(adamsStop);
+    console.log("Test finised, ADAMS test server has been stopped");
+  }
+  done();
+});
+
 describe("Test config.json", function() {
 
-  it('Should find and load config.json file', function () {
+  it('Should find and load config.json file', function (done) {
     assert.notEqual(config, null);
+    done();
   });
-  it('Should find "adams" field in config file', function () {
+  it('Should find "adams" field in config file', function (done) {
     assert.notEqual(config.adams, null);
+    done();
   });
 });
 
@@ -173,7 +199,6 @@ describe('Test server connection', function() {
         if(error) throw new Error(error);
         assert.equal(response.statusCode, 200);
         done();
-
       });
     });
   });

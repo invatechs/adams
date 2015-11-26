@@ -60,11 +60,11 @@ if(!program.stop) {
     // Log file is specified
 		var logFile = '/dev/null';
 		if(program.log) {
-			logFile = path.resolve(__dirname, '../' + program.log);
+			logFile = program.log;
 		}
     
-    var out = fs.openSync(logFile, 'a');
-    var err = fs.openSync(logFile, 'a');
+    var out = fs.openSync(logFile, 'w');
+    var err = fs.openSync(logFile, 'w');
     spawnOptions.stdio = [ 'ignore', out, err];
 
     var child = spawn(nodeCommand, appArgs, spawnOptions);
