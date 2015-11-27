@@ -2,13 +2,51 @@
 ADAMS stands for "automated deploy and monitoring system". 
 It uses GitHub and BitBucket webhooks to clone ([nodegit](https://www.npmjs.com/package/nodegit)), deploy and notify ([sender-js](https://www.npmjs.com/package/sender-js)).
 
-1. Start it on your server;
+1. Start it on your server.
 2. Edit `config.json` file.
 
 
 For configuring `adams` edit `config.json`.
 
-## Projects:
+## Installation
+ADAMS has been fully tested in POSIX systems. There are to ways to install and use ADAMS:
+### 1. Install ADAMS globally
+Install ADAMS as separate application using the following command:
+	npm install -g adams
+
+### 2. Install as usual Node.js application
+Clone ADAMS onto your system and run it as common Node.js application.
+
+## Usage
+ADAMS can be used in several ways. If you have installed it globally with `-g` option, ADAMS will be avaible systemwide with `adams` command. To stop service use `stop` keyword:
+	adams stop
+
+Here is the full list of CLI options for ADAMS:
+```
+Usage: adams [options]
+
+  Options:
+
+    -h, --help                     output usage information
+    -V, --version                  output the version number
+    -p, --projects [projectsFile]  Path to projects file
+    stop                           Stop the application
+    -l, --log [logFile]            Path to log file
+```
+
+If you have not installed ADAMS globally you can use `npm link` command to make ADAMS CLI works properly.
+
+Also you can run ADAMS simply with command
+	node adams
+which is call in ADAMS directory
+
+And there are two SH files to start and stop ADAMS service
+	./start.sh
+	./stop.sh
+Make sure that both files have executable right or run them with `sh` command.
+
+
+## Projects configuration
 
 All the fields are required. Remember to use pure JSON format. Each project could be overwritten like so:
 
@@ -24,7 +62,7 @@ All the fields are required. Remember to use pure JSON format. Each project coul
 ]
 ```
 
-## Notifications:
+## Notifications
 
 We use sender-js for sending notifications by e-mail, Slack or HTTP API.
 
