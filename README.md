@@ -48,8 +48,8 @@ which is call in ADAMS directory
 
 And there are two SH files to start and stop ADAMS service
 ```
-	./start.sh
-	./stop.sh
+./start.sh
+./stop.sh
 ```
 Make sure that both files have executable right or run them with `sh` command.
 
