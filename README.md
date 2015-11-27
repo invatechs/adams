@@ -12,14 +12,18 @@ For configuring `adams` edit `config.json`.
 ADAMS has been fully tested in POSIX systems. There are to ways to install and use ADAMS:
 ### 1. Install ADAMS globally
 Install ADAMS as separate application using the following command:
-`npm install -g adams`
+```
+npm install -g adams
+```
 
 ### 2. Install as usual Node.js application
 Clone ADAMS onto your system and run it as common Node.js application.
 
 ## Usage
 ADAMS can be used in several ways. If you have installed it globally with `-g` option, ADAMS will be avaible systemwide with `adams` command. To stop service use `stop` keyword:
-`adams stop`
+```
+adams stop
+```
 
 Here is the full list of CLI options for ADAMS:
 ```
@@ -37,7 +41,9 @@ Usage: adams [options]
 If you have not installed ADAMS globally you can use `npm link` command to make ADAMS CLI works properly.
 
 Also you can run ADAMS simply with command
-`node adams`
+```
+node adams
+```
 which is call in ADAMS directory
 
 And there are two SH files to start and stop ADAMS service
