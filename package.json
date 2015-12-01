@@ -21,7 +21,6 @@
     "request": "^2.65.0",
     "sender-js": "*",
     "striptags": "latest",
-    "nodegit": "0.5.0",
 	"commander": "latest",
 	"win-spawn": "latest",
 	"is-running": "latest"

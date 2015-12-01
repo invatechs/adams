@@ -1,12 +1,19 @@
 # Adams
-ADAMS stands for "automated deploy and monitoring system". 
-It uses GitHub and BitBucket webhooks to clone ([nodegit](https://www.npmjs.com/package/nodegit)), deploy and notify ([sender-js](https://www.npmjs.com/package/sender-js)).
+ADAMS stands for "Automated Deploy and Monitoring System". 
+It uses GitHub and BitBucket webhooks to start the process of downloading repository's archive, 
+unarchiving, deploying the project with `npm install`, `npm test` (if defined),
+`npm stop` (if `npm test` successfully passed or wasn't defined) and `npm start`. 
+You can deploy the project with your own `.sh` script easily setting 
+```
+"scripts": {
+    "adams": "sh runYourScript.sh"
+}
+``` 
+in your `package.json` and ADAMS will run `npm adams` instead of commonly used stack of `npm` commands mentioned above. 
 
-1. Start it on your server.
-2. Edit `config.json` file.
+Then ADAMS can notify you using [sender-js](https://www.npmjs.com/package/sender-js) for any of succeed or failed outcome of deployment.
 
 
-For configuring `adams` edit `config.json`.
 
 ## Installation
 ADAMS has been fully tested in POSIX systems. There are to ways to install and use ADAMS:

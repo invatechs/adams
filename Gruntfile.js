@@ -5,7 +5,8 @@ module.exports = function(grunt) {
     jshint: {
       test: {
         src: [
-          '*.js'
+          '*.js',
+          'lib/*.js'
         ],
         options: {
           predef: ['exports', 'module', 'Buffer', 'console', '__dirname'],
