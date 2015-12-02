@@ -5,11 +5,15 @@ unarchiving, deploying the project with `npm install`, `npm test` (if defined),
 `npm stop` (if `npm test` successfully passed or wasn't defined) and `npm start`. 
 You can deploy the project with your own `.sh` script easily setting 
 ```
-"scripts": {
-    "adams": "sh runYourScript.sh"
+{
+    ...
+    "scripts": {
+        "adams": "sh runYourScript.sh"
+    }
+    ...
 }
 ``` 
-in your `package.json` and ADAMS will run `npm adams` instead of commonly used stack of `npm` commands mentioned above. 
+in your `package.json` and ADAMS will run `npm run adams` instead of commonly used stack of `npm` commands mentioned above. 
 
 Then ADAMS can notify you using [sender-js](https://www.npmjs.com/package/sender-js) for any of succeed or failed outcome of deployment.
 
@@ -27,7 +31,8 @@ npm install -g adams
 Clone ADAMS onto your system and run it as common Node.js application.
 
 ## Usage
-ADAMS can be used in several ways. If you have installed it globally with `-g` option, ADAMS will be avaible systemwide with `adams` command. To stop service use `stop` keyword:
+ADAMS can be used in several ways. If you have installed it globally with `-g` option, 
+ADAMS will be avaible systemwide with `adams` command. To stop service use `stop` keyword:
 ```
 adams stop
 ```
@@ -66,15 +71,19 @@ Make sure that both files have executable right or run them with `sh` command.
 All the fields are required. Remember to use pure JSON format. Each project could be overwritten like so:
 
 ```js
-"projects": [
-    {
-        "git": "https://github.com/invatechs/adams.git", // link used for clone project;
-        "gitBranch": "master", // single branch you want to be proceeded;
-        "username": "username", // username for git account that have at least read rights for git repository; you can specify empty username and password if current git account is publick; 
-        "password": "password", // password for that git account;
-        "webhookPath": "your-hook-path" // path for webhook after server DNS address, for example: you have your server running on `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com`, so you can create webhook `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com/your-hook-path`;
-    }
-]
+{
+    ...
+    "projects": [
+        {
+            "git": "https://github.com/invatechs/adams.git", // link used for clone project;
+            "gitBranch": "master", // single branch you want to be proceeded;
+            "username": "username", // username for git account that have at least read rights for git repository; you can specify empty username and password if current git account is publick; 
+            "password": "password", // password for that git account;
+            "webhookPath": "your-hook-path" // path for webhook after server DNS address, for example: you have your server running on `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com`, so you can create webhook `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com/your-hook-path`;
+        }
+    ]
+    ...
+}
 ```
 
 ## Notifications
@@ -84,20 +93,69 @@ We use sender-js for sending notifications by e-mail, Slack or HTTP API.
 Configure `"notification"` field in `config.json` according to [sender-js](https://www.npmjs.com/package/sender-js) like so:
 
 ```js
-"notifications": {
-    "senderJs": {
-      "slack": {
-        "token": "xoxb-12312312312-dfsfd7t2JfdfJfdslfsdjap2",
-        "channel": "general"
-      },
-      "mailgun": {
-        "apiKey": "key-123213123123123123kjn2312n3123kn",
-        "domain": "mg.your-domain.com"
-      }
-    },
-    "mailReceiver": "email-address1@mail.com,email-address2@mail.com",
-    "mailSender": "dummy-email-address@mail.com"
-  }
+{
+    ...
+    "notifications": {
+        "senderJs": {
+        "slack": {
+            "token": "xoxb-12312312312-dfsfd7t2JfdfJfdslfsdjap2",
+            "channel": "general"
+        },
+            "mailgun": {
+                "apiKey": "key-123213123123123123kjn2312n3123kn",
+                "domain": "mg.your-domain.com"
+            }
+        },
+        "mailReceiver": "email-address1@mail.com,email-address2@mail.com",
+        "mailSender": "dummy-email-address@mail.com"
+    }
+    ...
+}
+```
+
+
+## Temporary Directory
+
+Initially your project will be downloaded to `{adams root folder}/tmp/{repo}/{branch}/` directory, but 
+you can specify absolute path to your tempDirectory in `config.json`:
+
+```js
+{
+    ...
+    "tempDirectory": "/usr/www/adamsTmp/"
+    ...
+}
+```
+If you leave this field empty or remove it - ADAMS will use `./tmp` folder; otherwise before start 
+ADAMS will check your directory for write permission (if writes to your directory are not allowed - 
+ADAMS throw an error).
+
+
+## Monitoring
+
+Adams provides simple web interface for monitoring your `.log` files.
+
+Configuring monitoring requires you to follow steps below:
+
+1) Configure `config.json` - add/update `"monitoring"` field like so:
+```js
+{
+    ...
+    "monitoring": {
+        "path": "adams-log", // path for all projects page
+        "projects": [
+            {
+                "logPath": "/var/www/app1/app.log", // absolute path to the .log file
+                "alias": "my-app-1" // name that would be shown at the all projects page
+            },
+            {
+                "logPath": "/var/www/app2/app.log",
+                "alias": "my-app-2"
+            }
+        ]
+    }
+    ...
+}
 ```
 
 
@@ -117,29 +175,6 @@ server {
 }
 ```
  
-
-## Monitoring
-
-Adams provides simple web interface for monitoring your `.log` files.
-
-Configuring monitoring requires you to follow steps below:
-
-1) Configure `config.json` - add/update `"monitoring"` field like so:
-```js
-"monitoring": {
-    "path": "adams-log", // path for all projects page
-    "projects": [
-        {
-            "logPath": "/var/www/app1/app.log", // absolute path to the .log file
-            "alias": "my-app-1" // name that would be shown at the all projects page
-        },
-        {
-            "logPath": "/var/www/app2/app.log",
-            "alias": "my-app-2"
-        }
-    ]
-}
-```
 
 2) Make sure that route `/adams-log` is available through you Nginx `.conf`. Look at [Configuring Nginx](#configuring-nginx).
 
