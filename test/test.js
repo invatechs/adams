@@ -51,14 +51,15 @@ var gitHubTestBody = {
 setTimeout(function() {
   var request = require('request');
   var address = 'http://localhost:7895/invatechs/adams';
-  var b = JSON.stringify('{"test":"json"}');
+  var b = JSON.stringify(gitHubTestBody);
   request({
     uri: address,
     method: 'POST',
     headers: {
-      "user-agent": "github"
+      "user-agent": "github",
+      "content-type": "application/json"
     },
-    body: JSON.stringify(gitHubTestBody)
+    body: b
   }, function(error, response, body){
     if(error) throw new Error(error);
     console.log('Test request to GitHub: response.statusCode ' + response.statusCode + '; response.body:' + JSON.stringify(body));
