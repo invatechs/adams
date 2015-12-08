@@ -6,10 +6,11 @@ module.exports = function(grunt) {
       test: {
         src: [
           '*.js',
-          'lib/*.js'
+          'lib/*.js',
+          'bin/*.js'
         ],
         options: {
-          predef: ['exports', 'module', 'Buffer', 'console', '__dirname'],
+          predef: ['exports', 'module', 'Buffer', 'console', '__dirname', 'process'],
           curly: true,
           eqeqeq: true,
           immed: true,
