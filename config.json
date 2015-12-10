@@ -9,7 +9,7 @@
       "gitBranch": "master",
       "username": "",
       "password": "",
-      "webhookPath": "invatechs/adams"
+      "webHookPath": "invatechs/adams"
     }
   ],
   "notifications": {},

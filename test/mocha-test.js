@@ -47,7 +47,7 @@ try {
 /**
  * Creating object to use it as request.body for test POST request;
  * The object consists of the minimum required set of fields for detecting
- * that is BitBucket-like webhook POST request;
+ * that is BitBucket-like webHook POST request;
  * @type {{push: {changes: *[]}, repository: {full_name: string}, actor: {username: string}}}
  */
 var bitBucketTestBody = {
@@ -75,7 +75,7 @@ var bitBucketTestBody = {
 /**
  * Creating object to use it as request.body for test POST request;
  * The object consists of the minimum required set of fields for detecting
- * that is GitHub-like webhook POST request;
+ * that is GitHub-like webHook POST request;
  * @type {{ref: string, repository: {full_name: string}, commits: *[]}}
  */
 var gitHubTestBody = {
@@ -143,7 +143,7 @@ describe('Test server connection', function() {
     it('Should return a response.statusCode 200', function (done) {
 
       var protocol = 'http';
-      var uri = protocol + '://' + config.adams.host + ':' + config.adams.port + '/' + config.projects[0].webhookPath;
+      var uri = protocol + '://' + config.adams.host + ':' + config.adams.port + '/' + config.projects[0].webHookPath;
       var body = JSON.stringify(bitBucketTestBody);
 
       request({
@@ -168,7 +168,7 @@ describe('Test server connection', function() {
     it('Should return a response.statusCode 200', function (done) {
 
       var protocol = 'http';
-      var uri = protocol + '://' + config.adams.host + ':' + config.adams.port + '/' + config.projects[0].webhookPath;
+      var uri = protocol + '://' + config.adams.host + ':' + config.adams.port + '/' + config.projects[0].webHookPath;
       var body = JSON.stringify(gitHubTestBody);
 
       request({

@@ -2,7 +2,7 @@
   "name": "adams",
   "author": "Invatecs Software",
   "keywords": [
-    "webhook",
+    "webHook",
     "hook",
     "deploy",
     "notification"
@@ -11,7 +11,7 @@
     "Dmitry Rusakov <dmitryrusakov@gmail.com>",
     "Alex Sadovsky <alex.sad.dev@gmail.com>"
   ],
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Automated Deploy And Monitoring System",
   "main": "./adams.js",
   "dependencies": {

@@ -1,6 +1,6 @@
 # Adams
 ADAMS stands for "Automated Deploy and Monitoring System". 
-It uses GitHub and BitBucket webhooks to start the process of downloading repository's archive, 
+It uses GitHub and BitBucket webHooks to start the process of downloading repository's archive, 
 unarchiving, deploying the project with `npm install`, `npm test` (if defined),
 `npm stop` (if `npm test` successfully passed or wasn't defined) and `npm start`. 
 You can deploy the project with your own `.sh` script easily setting 
@@ -79,11 +79,17 @@ All the fields are required. Remember to use pure JSON format. Each project coul
             "gitBranch": "master", // single branch you want to be proceeded;
             "username": "username", // username for git account that have at least read rights for git repository; you can specify empty username and password if current git account is publick; 
             "password": "password", // password for that git account;
-            "webhookPath": "your-hook-path" // path for webhook after server DNS address, for example: you have your server running on `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com`, so you can create webhook `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com/your-hook-path`;
+            "webHookPath": "your-hook-path" // path for webHook after server DNS address, for example: you have your server running on `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com`, so you can create webHook `http://ec2-11-22-333-444.us-west-1.compute.amazonaws.com/your-hook-path`;
         }
     ]
     ...
 }
+```
+
+Keep in mind that adams escapes some characters from `username` and `password` using regex below:
+
+```js
+/[\/\\^$*+?.()|[\]{}]/g
 ```
 
 ## Notifications
@@ -161,7 +167,7 @@ Configuring monitoring requires you to follow steps below:
 
 ## <a name="configuring-nginx"></a>Configuring Nginx
 
-You should update Nxing's `.conf` file adding routes according to your webhooks paths. It can look like so:
+You should update Nginx's `.conf` file adding routes according to your webHooks paths. It can look like so:
                                                                           
 ```js
 server {
