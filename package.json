@@ -11,7 +11,7 @@
     "Dmitry Rusakov <dmitryrusakov@gmail.com>",
     "Alex Sadovsky <alex.sad.dev@gmail.com>"
   ],
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Automated Deploy And Monitoring System",
   "main": "./adams.js",
   "dependencies": {
