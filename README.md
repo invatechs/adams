@@ -152,17 +152,21 @@ Configuring monitoring requires you to follow steps below:
         "projects": [
             {
                 "logPath": "/var/www/app1/app.log", // absolute path to the .log file
-                "alias": "my-app-1" // name that would be shown at the all projects page
+                "alias": "my-app-1", // name that would be shown at the all projects page
+                "middleware": "" // specify if you start adams with middleware path; otherwise leave it empty
             },
             {
                 "logPath": "/var/www/app2/app.log",
-                "alias": "my-app-2"
+                "alias": "my-app-2",
+                "middleware": ""
             }
         ]
     }
     ...
 }
 ```
+
+
 
 
 ## <a name="configuring-nginx"></a>Configuring Nginx
